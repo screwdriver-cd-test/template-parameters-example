@@ -1,0 +1,16 @@
+shared:
+  image: node:12
+
+jobs:
+  validate:
+    requires: [~pr, ~commit]
+    steps:
+      - install_prerequisites: npm install -g screwdriver-template-main
+      - validate_default_template: template-validate
+
+  publish:
+    requires: [ validate ]
+    steps:
+      - install_prerequisites: npm install -g screwdriver-template-main
+      - publish: template-publish
+      - autotag: template-tag --name screwdriver-examples/parameters-example --tag latest

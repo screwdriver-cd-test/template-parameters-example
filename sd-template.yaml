@@ -1,0 +1,19 @@
+namespace: screwdriver-examples
+name: parameters-example
+version: "1"
+description: An example template for testing parameters
+maintainer: dsagar@yahooinc.com
+config:
+  image: node:12
+  parameters:
+    music:
+      value: [ "country", "hip hop" ]
+      description: "favorite music"
+    color: [ "black", "white" ]
+    sports:
+      value: [ "baseball", "basketball" ]
+  steps:
+    - step_print_template_parameters: |
+        echo music = $(meta get parameters.music)
+        echo color = $(meta get parameters.color)
+        echo sports = $(meta get parameters.sports)
